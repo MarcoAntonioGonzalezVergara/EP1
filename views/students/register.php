@@ -87,28 +87,45 @@
 	  		var data      = new FormData();
 	  		var usuario   = document.querySelector('#usuario').value;
 	  		var contra    = document.querySelector('#password').value;
+	  		var contraVal = document.querySelector('#passwordVal').value;
 	  		var nombre    = document.querySelector('#nombre').value;
 	  		var apellidoP = document.querySelector('#apellidoP').value;
 	  		var apellidoM = document.querySelector('#apellidoM').value;
 
-	  		data.append('usuario', usuario);
-	  		data.append('contra', contra);
-	  		data.append('nombre', nombre);
-	  		data.append('apellidoP', apellidoP);
-	  		data.append('apellidoM', apellidoM);
-	  		data.append('action', "register");
+	  		if(usuario=="" || contra=="" || contraVal=="" || nombre=="" || apellidoP=="" || apellidoM==""){
+	  			alert("Llena los campos");
+	  		}else{
+	  			if (contra == contraVal) {
+		  			if (valid(nombre) && valid(apellidoP) && valid(apellidoM)) {
+		  				data.append('usuario', usuario);
+				  		data.append('contra', contra);
+				  		data.append('nombre', nombre);
+				  		data.append('apellidoP', apellidoP);
+				  		data.append('apellidoM', apellidoM);
+				  		data.append('action', "register");
 
-	  		xhr.addEventListener('loadend',function(){
-	  			alert("Operación realizada con exito");
-		        document.querySelector("#usuario").value = "";
-		        document.querySelector("#password").value = "";
-		        document.querySelector("#passwordVal").value = "";
-		        document.querySelector("#nombre").value = "";
-		        document.querySelector("#apellidoP").value = "";
-		        document.querySelector("#apellidoM").value = "";
-	            window.location.href = '../index.php';
-	  		});
-	  		xhr.send(data);
+				  		xhr.addEventListener('loadend',function(){
+				  			alert("Operación realizada con exito");
+					        document.querySelector("#usuario").value = "";
+					        document.querySelector("#password").value = "";
+					        document.querySelector("#passwordVal").value = "";
+					        document.querySelector("#nombre").value = "";
+					        document.querySelector("#apellidoP").value = "";
+					        document.querySelector("#apellidoM").value = "";
+				            window.location.href = '../index.php';
+				  		});
+				  		xhr.send(data);
+		  			}
+		  			
+		  		}else{
+		  			alert("Las contraseñas no coinciden");
+		  		}
+	  		}
+	  			
+	  	}
+	  	function valid($chain){
+
+	  		return /^[A-Za-z\s]+$/.test($chain);
 	  	}
 	</script>
 

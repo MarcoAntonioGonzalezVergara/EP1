@@ -9,6 +9,7 @@
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<link rel="shortcut icon" href="./img/ant.ico">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 </head>
@@ -22,6 +23,7 @@
 			</video>
 
 			<center class="front">
+
 				<img src="./img/ANTnameextend.png">
 		      	<h2 class="white-text">Inicio de Sesión</h2>
 
@@ -61,7 +63,7 @@
 
 	<script>
 		function login(){
-	  		var xhr = new XMLHttpRequest();
+			var xhr = new XMLHttpRequest();
 	  		var url = 'http://localhost/EP1/controllers/StudentController.php';
 	  		xhr.open('POST',url,true);
 
@@ -69,18 +71,21 @@
 	  		var usuario   = document.querySelector('#usuario').value;
 	  		var contra    = document.querySelector('#password').value;
 
-	  		data.append('usuario', usuario);
-	  		data.append('contra', contra);
-	  		data.append('action', "enter");
-	  		
-  			xhr.addEventListener('loadend',function(){
-	  			alert("Bienvenido");
-		        document.querySelector("#usuario").value = "";
-		        document.querySelector("#password").value = "";
-	            window.location.href = '../views/subjects/home.php';
-	  		});
-	  		xhr.send(data);
+	  		if(usuario=="" || contra==""){
+	  			alert("Llena los campos");
+	  		}else{
 
+		  		data.append('usuario', usuario);
+		  		data.append('contra', contra);
+		  		data.append('action', "enter");
+		  		
+	  			xhr.addEventListener('loadend',function(){
+			        document.querySelector("#usuario").value = "";
+			        document.querySelector("#password").value = "";
+		            window.location.href = '../views/subjects/home.php';
+		  		});
+		  		xhr.send(data);
+	  		}
 	  	}
 	</script>
 

@@ -6,6 +6,7 @@
 	<nav class="top-nav fixed">
 		<div class="nav-wrapper indigo">
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a href="../subjects/home.php">Materias</a></li>
 				<li><a href="../index.php">Cerrar Sesión</a></li>
 			</ul>
 		</div>

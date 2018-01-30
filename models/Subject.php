@@ -1,6 +1,5 @@
 <?php
 require_once 'Database.php';
-session_start();
 
 class Subject
 {
@@ -15,14 +14,15 @@ class Subject
 		$this->descripcion    = $descripcion;
 		$this->id = $id;
 	}
-	public static function getName($nombre)
+	public static function getName($nombre,$id)
 	{
 		$sql = "SELECT
 				*
 			   FROM
 				materia
 				WHERE
-				nombre = '$nombre'";
+				nombre = '$nombre'
+				and Alumno_idAlumno = '$id'";
 		$db = new Database();
 		if ($rows = $db->query($sql)) {
 			$db->close();

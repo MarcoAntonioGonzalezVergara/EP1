@@ -36,6 +36,13 @@ if(isset($_POST["action"])){
 			break;
 
 		case 'close':
+				session_start();
+				unset($_SESSION['session_id']);
+				unset($_SESSION['session_usuario']);
+				unset($_SESSION['session_password']);
+				unset($_SESSION['session_nombre']);
+				unset($_SESSION['session_apellidoP']);
+				unset($_SESSION['session_apellidoM']);
 				session_destroy();
 			break;
 

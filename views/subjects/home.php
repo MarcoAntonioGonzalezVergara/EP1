@@ -101,6 +101,7 @@
 			    <div class="modal-content">
 			      	<h4>Eliminar Materia</h4>
 			      	<p hidden id="idMateria2"></p>
+			    </div>
 			    <div class="modal-footer">
 			      	<button class="modal-action modal-close waves-effect waves-light btn-flat green" onclick="del(); removeSubjects(); getSubjects();">Eliminar</button>
 			      	<button class="modal-action modal-close waves-effect waves-light btn-flat red">Cancelar</button>
@@ -127,26 +128,31 @@
 	  		var profesor = document.querySelector('#profesor').value;
 	  		var descripcion = document.querySelector('#descripcion').value;
 
-	  		if (profesor == "") {
-	  			profesor = "No se registro profesor";
+	  		if(nombre == ""){
+	  			alert("El nombre es obligatorio");
+	  		}else{
+	  			if (profesor == "") {
+		  			profesor = "No se registro profesor";
+		  		}
+
+		  		if (descripcion == "") {
+		  			descripcion = "No se hay descripcion";
+		  		}
+
+		  		data.append('nombre', nombre);
+		  		data.append('profesor', profesor);
+		  		data.append('descripcion', descripcion);
+		  		data.append('action', "register");
+
+		  		xhr.addEventListener('loadend',function(){
+		  			
+			        document.querySelector("#nombre").value = "";
+			        document.querySelector("#profesor").value = "";
+			        document.querySelector("#descripcion").value = "";
+		  		});
+		  		xhr.send(data);
 	  		}
 
-	  		if (descripcion == "") {
-	  			descripcion = "No se hay descripcion";
-	  		}
-
-	  		data.append('nombre', nombre);
-	  		data.append('profesor', profesor);
-	  		data.append('descripcion', descripcion);
-	  		data.append('action', "register");
-
-	  		xhr.addEventListener('loadend',function(){
-	  			
-		        document.querySelector("#nombre").value = "";
-		        document.querySelector("#profesor").value = "";
-		        document.querySelector("#descripcion").value = "";
-	  		});
-	  		xhr.send(data);
 	  	}
 	  	function update(){
 	  		var xhr = new XMLHttpRequest();
@@ -159,24 +165,29 @@
 	  		var descripcion = document.querySelector('#descripcionM').value;
 	  		var id = document.querySelector('#idMateria').innerHTML;
 
-	  		if (profesor == "") {
-	  			profesor = "No se registro profesor";
-	  		}
+	  		if(nombre == ""){
+	  			alert("El nombre es obligatorio");
+	  		}else{
 
-	  		if (descripcion == "") {
-	  			descripcion = "No se hay descripcion";
-	  		}
+		  		if (profesor == "") {
+		  			profesor = "No se registro profesor";
+		  		}
 
-	  		data.append('nombre', nombre);
-	  		data.append('profesor', profesor);
-	  		data.append('descripcion', descripcion);
-	  		data.append('id', id);
-	  		data.append('action', "update");
+		  		if (descripcion == "") {
+		  			descripcion = "No se hay descripcion";
+		  		}
 
-	  		xhr.addEventListener('loadend',function(){
-	  			
-	  		});
-	  		xhr.send(data);
+		  		data.append('nombre', nombre);
+		  		data.append('profesor', profesor);
+		  		data.append('descripcion', descripcion);
+		  		data.append('id', id);
+		  		data.append('action', "update");
+
+		  		xhr.addEventListener('loadend',function(){
+		  			
+		  		});
+		  		xhr.send(data);
+		  	}
 	  	}
 	  	function del(){
 	  		var xhr = new XMLHttpRequest();
@@ -194,7 +205,7 @@
 	  		});
 	  		xhr.send(data);
 	  	}
-	  	function close(){
+	  	function logOut(){
 	  		var xhr = new XMLHttpRequest();
 	  		var url = 'http://localhost/EP1/controllers/StudentController.php';
 	  		xhr.open('POST',url,true);
@@ -254,6 +265,7 @@
 	            button2.className = "id waves-effect waves-light btn modal-trigger red";
 	            button2.href = "#modal3";
 	            button2.id = subject.idMateria;
+	            button2.onclick = set();
 	            icon2.className = "large material-icons";
 	            icon2.innerHTML = "clear";
 

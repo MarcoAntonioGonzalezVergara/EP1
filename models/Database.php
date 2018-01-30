@@ -10,8 +10,8 @@ class Database
 	{
 		$this->host       =		"localhost";
 		$this->username   =		"root";
-		$this->password   =		"";
-		$this->database   =		"ep1";
+		$this->password   =		"root";
+		$this->database   =		"mydb";
 		$this->mysqli     =		null;
 	}
 

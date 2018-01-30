@@ -10,7 +10,7 @@ if(isset($_POST["action"])){
 				$profesor = Cleaner::cleanInput($_POST["profesor"]);
 				$descripcion = Cleaner::cleanInput($_POST["descripcion"]);
 
-				if ($subject = Subject::getName($nombre)) {
+				if ($subject = Subject::getName($nombre) && Subject::get($_SESSION['session_id'])) {
 					echo "La materia ya existe";
 				}else{
 					$subject = new Subject($nombre,$profesor,$descripcion,$_SESSION['session_id']);
@@ -26,7 +26,7 @@ if(isset($_POST["action"])){
 				$descripcion = Cleaner::cleanInput($_POST["descripcion"]);
 				$id = $_POST["id"];
 
-				if ($subject = Subject::getName($nombre)) {
+				if ($subject = Subject::getName($nombre) && Subject::get($_SESSION['session_id'])) {
 					echo "La materia ya existe";
 				}else{
 					Subject::update($nombre,$profesor,$descripcion,$id);
@@ -54,6 +54,14 @@ if(isset($_POST["action"])){
 
 		case 'set':
 				$subjects = Subject::getSubject($_GET["id"]);
+
+				$subjects = json_encode($subjects);
+
+				echo $subjects;
+			break;
+
+		case 'name':
+				$subjects = Subject::getName($_GET["name"],$_SESSION['session_id']);
 
 				$subjects = json_encode($subjects);
 
